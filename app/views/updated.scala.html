@@ -1,0 +1,32 @@
+@(flights: List[Flight])
+
+@main("Lufthansa Price Check - Updated") {
+
+	<h1>Update status</h1>
+	
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Start</th>
+				<th>Destination</th>
+				<th>From</th>
+				<th>To</th>
+				<th>Price</th>
+			</tr>
+		<thead>
+		
+		<tbody>
+		@for(flight <- flights) {
+			<tr>
+				<td>@flight.fromAirport</td>
+				<td>@flight.toAirport</td>
+				<td>@flight.fromDateTime</td>
+				<td>@flight.toDateTime</td>
+				<td>@flight.price</td>
+			</tr>
+		}
+		</tbody>
+	
+	</table>
+
+}
