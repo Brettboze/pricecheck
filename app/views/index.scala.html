@@ -1,5 +1,15 @@
+@(checks: List[String])
+
 @main("Lufthansa Price Check") {
 
 	<h1>Lufthansa Price Check</h1>
+	
+	<h2>Checks</h2>
+	
+	<ul>
+	@for(check <- checks) {
+		<li>@check</li>
+	}
+	</ul>
 
 }

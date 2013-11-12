@@ -1,10 +1,12 @@
 package controllers;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 import check.PriceCheck;
@@ -19,7 +21,13 @@ import views.html.*;
 public class Application extends Controller {
 
     public static Result index() {
-        return ok(index.render());
+    	ArrayList<String> checks = new ArrayList<String>();
+    	File dataDir = new File("data/");
+    	
+    	for (String file: dataDir.list())
+    		checks.add(file);
+    	
+        return ok(index.render(checks));
     }
     
     public static Result update() {
