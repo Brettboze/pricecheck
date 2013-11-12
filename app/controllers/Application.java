@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
+
 import check.PriceCheck;
 
 import models.Flight;
@@ -24,10 +25,11 @@ public class Application extends Controller {
 
     public static Result index() {
     	ArrayList<String> checks = new ArrayList<String>();
-    	File dataDir = new File("data/");
+    	File dataDir = new File("public/");
     	
-    	for (String file: dataDir.list())
-    		checks.add(file);
+    	for (File file: dataDir.listFiles())
+    		if (file.isFile())
+    			checks.add(file.getName());
     	
         return ok(index.render(checks));
     }
@@ -36,7 +38,7 @@ public class Application extends Controller {
     	ArrayList<String> lines = new ArrayList<String>();
     	
     	try {
-	    	BufferedReader in = new BufferedReader(new FileReader("data/" + file));
+	    	BufferedReader in = new BufferedReader(new FileReader("public/" + file));
 	    	String line;
 	    	
 	    	while((line = in.readLine()) != null)
@@ -68,7 +70,7 @@ public class Application extends Controller {
     
     private static void saveToFile(String filename, String price) {
     	try {
-			PrintWriter out = new PrintWriter(new FileOutputStream("data/" + filename, true));
+			PrintWriter out = new PrintWriter(new FileOutputStream("public/" + filename, true));
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String tmp = sdf.format(new Date()).toString();
 			out.println(tmp + "\t" + price);
