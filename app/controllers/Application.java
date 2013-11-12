@@ -1,8 +1,10 @@
 package controllers;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,6 +30,24 @@ public class Application extends Controller {
     		checks.add(file);
     	
         return ok(index.render(checks));
+    }
+    
+    public static Result show(String file) {
+    	ArrayList<String> lines = new ArrayList<String>();
+    	
+    	try {
+	    	BufferedReader in = new BufferedReader(new FileReader("data/" + file));
+	    	String line;
+	    	
+	    	while((line = in.readLine()) != null)
+	    		lines.add(line);
+	    	
+	    	in.close();
+    	} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
+    	return ok(show.render(file, lines));
     }
     
     public static Result update() {

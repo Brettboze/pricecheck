@@ -1,0 +1,11 @@
+@(file: String, lines: List[String])
+
+@main("Prices") {
+
+	<h1>Price for @file</h1>
+	
+	@for(line <- lines) {
+		@line <br />
+	}
+
+}
